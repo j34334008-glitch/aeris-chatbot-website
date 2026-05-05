@@ -1,0 +1,2092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aeris | AI Customer Support Chatbot</title>
+<link rel="icon" type="image/png" href="logo2.png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script>(function(){var t=localStorage.getItem('aeris-theme');if(t==='dark')document.documentElement.setAttribute('data-theme','dark');}());</script>
+<style>
+:root {
+  --bg: #ffffff;
+  --bg2: #f7f8fa;
+  --bg3: #f0f2f5;
+  --surface: #ffffff;
+  --border: #e4e7ec;
+  --border2: #d0d5dd;
+  --text: #101828;
+  --text2: #344054;
+  --muted: #667085;
+  --muted2: #98a2b3;
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --primary-light: rgba(59,130,246,0.1);
+  --primary-soft: rgba(59,130,246,0.15);
+  --primary-border: rgba(59,130,246,0.28);
+  --primary-ring: rgba(59,130,246,0.15);
+  --primary-ring-soft: rgba(59,130,246,0.06);
+  --primary-gradient: #60a5fa;
+  --hero-bg:
+    radial-gradient(circle at 15% 20%, rgba(59,130,246,0.12), transparent 35%),
+    radial-gradient(circle at 85% 70%, rgba(96,165,250,0.10), transparent 40%),
+    linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+  --hero-glow-primary: rgba(59,130,246,0.12);
+  --hero-glow-secondary: rgba(96,165,250,0.1);
+  --hero-center-light: rgba(255,255,255,0.2);
+  --hero-text: #101828;
+  --hero-highlight: #2563eb;
+  --hero-muted: #667085;
+  --hero-primary: #2563eb;
+  --hero-primary-hover: #1d4ed8;
+  --hero-secondary-bg: #ffffff;
+  --hero-secondary-hover: #f8fbff;
+  --hero-secondary-text: #101828;
+  --hero-secondary-border: #d0d5dd;
+  --hero-divider: rgba(16,24,40,0.1);
+  --hero-card-bg: #ffffff;
+  --hero-card-border: #e4e7ec;
+  --hero-card-shadow: 0 20px 40px rgba(16,24,40,0.08);
+  --radius: 12px;
+  --shadow: 0 1px 3px rgba(16,24,40,0.1), 0 1px 2px rgba(16,24,40,0.06);
+  --shadow-md: 0 4px 8px -2px rgba(16,24,40,0.1), 0 2px 4px -2px rgba(16,24,40,0.06);
+  --shadow-lg: 0 12px 16px -4px rgba(16,24,40,0.08), 0 4px 6px -2px rgba(16,24,40,0.03);
+  --nav-bg: rgba(255,255,255,0.95);
+  --banner-bg: #101828;
+  --footer-bg: #101828;
+  --page-grid: rgba(59,130,246,0.04);
+}
+
+/* DARK THEME */
+[data-theme="dark"] {
+  --bg: #0d0f17;
+  --bg2: #161824;
+  --bg3: #1d2033;
+  --surface: #1a1d2e;
+  --border: #252840;
+  --border2: #30345a;
+  --text: #e8eaf6;
+  --text2: #c5c9e0;
+  --muted: #8b90b0;
+  --muted2: #5e6380;
+  --primary-color: #14b8a6;
+  --primary-hover: #2dd4bf;
+  --primary-light: rgba(20,184,166,0.1);
+  --primary-soft: rgba(20,184,166,0.15);
+  --primary-border: rgba(20,184,166,0.28);
+  --primary-ring: rgba(20,184,166,0.15);
+  --primary-ring-soft: rgba(20,184,166,0.06);
+  --primary-gradient: #2dd4bf;
+  --hero-bg:
+    radial-gradient(circle at 20% 20%, rgba(20,184,166,0.22), transparent 35%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.18), transparent 40%),
+    #0b0f1a;
+  --hero-glow-primary: rgba(20,184,166,0.35);
+  --hero-glow-secondary: rgba(59,130,246,0.22);
+  --hero-center-light: rgba(255,255,255,0.08);
+  --hero-text: #f8fafc;
+  --hero-highlight: #14b8a6;
+  --hero-muted: rgba(255,255,255,0.68);
+  --hero-primary: #14b8a6;
+  --hero-primary-hover: #2dd4bf;
+  --hero-secondary-bg: rgba(255,255,255,0.08);
+  --hero-secondary-hover: rgba(255,255,255,0.14);
+  --hero-secondary-text: #f8fafc;
+  --hero-secondary-border: rgba(255,255,255,0.18);
+  --hero-divider: rgba(255,255,255,0.14);
+  --hero-card-bg: var(--surface);
+  --hero-card-border: var(--border);
+  --hero-card-shadow: var(--shadow-lg);
+  --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 8px -2px rgba(0,0,0,0.4), 0 2px 4px -2px rgba(0,0,0,0.3);
+  --shadow-lg: 0 12px 16px -4px rgba(0,0,0,0.4), 0 4px 6px -2px rgba(0,0,0,0.2);
+  --nav-bg: rgba(13,15,23,0.95);
+  --banner-bg: #07080f;
+  --footer-bg: #07080f;
+  --page-grid: rgba(20,184,166,0.055);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  position: relative;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--page-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--page-grid) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+  z-index: 0;
+}
+body > * {
+  position: relative;
+  z-index: 1;
+}
+nav, .top-banner, .hero-card, .card-topbar, .card-messages,
+.card-input-row, .card-input, .features-bg, .feature-card,
+.btn-secondary, footer, .theme-toggle,
+.aeris-engine-section, .aeris-pipeline,
+.aeris-sidenav-num, .aeris-sidenav-label,
+.aeris-content-tag, .aeris-content-headline, .aeris-content-para,
+.aeris-learn-btn, .aeris-pipeline-label,
+.aeris-pipeline-step-label, .aeris-pipeline-step-desc,
+.aeris-pipeline-step-num, .aeris-pipeline-step {
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+}
+
+/* TOP BANNER */
+.top-banner {
+  background: var(--banner-bg);
+  color: #fff;
+  text-align: center;
+  padding: 10px 1rem;
+  font-size: 0.82rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+.top-banner span { color: var(--primary-color); }
+
+/* NAV */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px;
+}
+.nav-logo {
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--text); letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 10px;
+  text-decoration: none;
+}
+.nav-logo-img { height: 52px; width: auto; display: block; }
+.nav-links { display: flex; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--muted); text-decoration: none;
+  padding: 6px 14px; border-radius: 8px;
+  transition: color 0.15s, background 0.15s;
+}
+.nav-links a:hover { color: var(--text); background: var(--bg2); }
+.nav-links a.active { color: var(--primary-color); background: var(--primary-light); }
+.nav-cta {
+  background: var(--primary-color); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 9px 20px; font-size: 0.875rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s, box-shadow 0.15s;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.nav-cta:hover { background: var(--primary-hover); box-shadow: 0 0 0 4px var(--primary-ring); }
+.nav-cta svg { width: 14px; height: 14px; }
+
+/* HERO */
+.hero {
+  background: var(--hero-bg);
+  color: var(--hero-text);
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 100px max(2.5rem, calc((100vw - 1200px) / 2)) 90px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 0;
+  box-shadow: none;
+}
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: float 10s ease-in-out infinite alternate;
+}
+.hero::before {
+  background: radial-gradient(circle, var(--hero-glow-primary), transparent 60%);
+  filter: blur(120px);
+  top: -200px;
+  left: -150px;
+}
+.hero::after {
+  background: radial-gradient(circle, var(--hero-glow-secondary), transparent 60%);
+  filter: blur(140px);
+  right: -150px;
+  bottom: -200px;
+  animation-delay: -4s;
+}
+.hero .bg-light {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  top: 20%;
+  left: 40%;
+  background: radial-gradient(circle, var(--hero-center-light), transparent 70%);
+  filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero > * {
+  position: relative;
+  z-index: 2;
+}
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(40px); }
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.08); color: var(--primary-gradient);
+  border: 1px solid rgba(255,255,255,0.14);
+  backdrop-filter: blur(10px);
+  border-radius: 100px; padding: 4px 14px;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.02em; margin-bottom: 1.5rem;
+}
+.hero-tag .tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--primary-gradient); }
+.hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.03em; color: var(--hero-text);
+  margin-bottom: 1.25rem;
+  text-shadow: 0 0 20px var(--primary-ring);
+}
+.hero h1 em { font-style: normal; color: var(--hero-highlight); }
+.hero-sub {
+  font-size: 1.05rem; color: var(--hero-muted);
+  line-height: 1.75; max-width: 480px; margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--primary-color); color: #fff;
+  border: none; border-radius: 8px;
+  padding: 11px 22px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s, box-shadow 0.15s;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: var(--primary-hover); box-shadow: 0 0 0 4px var(--primary-ring); }
+.hero .btn-primary {
+  background: var(--hero-primary);
+  color: #fff;
+}
+.hero .btn-primary:hover {
+  background: var(--hero-primary-hover);
+}
+.hero .btn-secondary {
+  background: var(--hero-secondary-bg); color: var(--hero-secondary-text);
+  border: 1px solid var(--hero-secondary-border); border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+.btn-secondary {
+  background: var(--surface); color: var(--text2);
+  border: 1px solid var(--border2); border-radius: 8px;
+  padding: 11px 22px; font-size: 0.9rem; font-weight: 600;
+  cursor: pointer; transition: background 0.15s;
+  text-decoration: none; display: inline-flex; align-items: center;
+}
+.btn-secondary:hover { background: var(--bg2); }
+.hero .btn-secondary:hover { background: var(--hero-secondary-hover); }
+.hero-stats { display: flex; gap: 2rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--hero-divider); }
+.stat .num { font-size: 1.6rem; font-weight: 700; color: var(--hero-text); letter-spacing: -0.02em; }
+.stat .label { font-size: 0.8rem; color: var(--hero-muted); margin-top: 2px; }
+
+/* HERO RIGHT — CHAT CARD */
+.hero-card {
+  background: var(--hero-card-bg);
+  border: 1px solid var(--hero-card-border);
+  border-radius: 20px;
+  box-shadow: var(--hero-card-shadow);
+  overflow: hidden;
+}
+.card-topbar {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg2);
+}
+.card-bot-icon {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--primary-color); display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+.card-bot-name { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+.card-bot-status { font-size: 0.75rem; color: var(--primary-color); display: flex; align-items: center; gap: 5px; }
+.card-bot-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary-color); display: inline-block; }
+.card-messages { padding: 20px; display: flex; flex-direction: column; gap: 12px; height: 260px; overflow-y: auto; scroll-behavior: smooth; }
+.card-messages::-webkit-scrollbar { width: 4px; }
+.card-messages::-webkit-scrollbar-track { background: transparent; }
+.card-messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+
+/* Chat animation */
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.chat-entry { animation: bubbleIn 0.3s ease forwards; }
+.typing-wrap { align-self: flex-start; animation: bubbleIn 0.3s ease forwards; }
+.typing-indicator {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 10px 14px;
+  background: var(--bg2);
+  border-radius: 12px; border-bottom-left-radius: 4px;
+}
+.typing-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--muted2);
+  animation: typingBounce 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.18s; }
+.typing-dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+.chat-bubble {
+  max-width: 85%; padding: 10px 14px; border-radius: 12px;
+  font-size: 0.875rem; line-height: 1.55;
+}
+.chat-bubble.bot { background: var(--bg2); color: var(--text2); border-bottom-left-radius: 4px; align-self: flex-start; }
+.chat-bubble.user { background: var(--primary-color); color: #fff; border-bottom-right-radius: 4px; align-self: flex-end; }
+.chat-label { font-size: 0.7rem; color: var(--muted2); margin-bottom: 4px; }
+.chat-label.right { text-align: right; }
+.card-input-row {
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+  display: flex; gap: 8px; align-items: center;
+}
+.card-input {
+  flex: 1; border: 1px solid var(--border2); border-radius: 8px;
+  padding: 8px 12px; font-size: 0.85rem; color: var(--text);
+  background: var(--bg); outline: none; font-family: 'Inter', sans-serif;
+}
+.card-send-btn {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--primary-color); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px;
+  transition: background 0.15s;
+}
+.card-send-btn:hover { background: var(--primary-hover); }
+
+/* SECTION BASE */
+.section-wrap { padding: 5rem 2.5rem; max-width: 1200px; margin: 0 auto; }
+.section-header { margin-bottom: 3rem; }
+.section-tag {
+  display: inline-block;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--primary-color); margin-bottom: 0.75rem;
+}
+.section-title {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  font-weight: 700; letter-spacing: -0.025em; line-height: 1.2;
+  color: var(--text); margin-bottom: 1rem;
+}
+.section-sub { font-size: 1rem; color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+/* DIVIDER */
+.divider { border: none; height: 1px; background: var(--border); margin: 0; }
+
+/* FEATURES */
+.features-bg { background: transparent; }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+.feature-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.feature-card:hover { box-shadow: 0 10px 24px rgba(0,0,0,0.08); transform: translateY(-4px); }
+.overview-bg {
+  background-color: transparent;
+}
+.overview-cards .feature-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+.overview-cards .feature-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+}
+.feat-icon-wrap {
+  width: 58px; height: 58px; border-radius: 14px;
+  background: var(--primary-light); border: 1px solid var(--primary-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 1rem;
+}
+.feat-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.feat-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+/* MARKET / CAPABILITY CARDS */
+.market-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+.market-card,
+.capability-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.market-card:hover,
+.capability-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  border-color: var(--border2);
+}
+.market-icon,
+.capability-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  border: 1px solid var(--primary-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin-bottom: 1rem;
+}
+.market-title,
+.capability-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.5rem;
+}
+.market-desc,
+.capability-desc {
+  font-size: 0.86rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.capability-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  margin-bottom: 0.85rem;
+  background: var(--primary-soft);
+  color: var(--primary-color);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+[data-theme="dark"] .capability-badge { background: var(--primary-soft); }
+
+/* USE CASE / TOOLS */
+.usecase-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+.usecase-panel,
+.impact-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.usecase-panel {
+  padding: 1.5rem;
+}
+.usecase-panel-header {
+  margin-bottom: 1.5rem;
+}
+.usecase-panel .section-tag {
+  margin-bottom: 0.75rem;
+}
+.usecase-panel .section-title {
+  margin-bottom: 0;
+}
+.usecase-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+.usecase-timeline {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: relative;
+  padding-left: 1.55rem;
+}
+.usecase-timeline::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 0.42rem;
+  bottom: 0.42rem;
+  width: 2px;
+  background: var(--border);
+}
+.usecase-timeline li {
+  position: relative;
+}
+.usecase-timeline li::before {
+  content: '';
+  position: absolute;
+  left: -1.55rem;
+  top: 0.42rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary-color);
+  box-shadow: 0 0 0 4px var(--surface);
+}
+.timeline-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.4;
+  margin-bottom: 0.35rem;
+}
+.timeline-desc {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.impact-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.impact-card {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.impact-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.impact-num {
+  color: var(--primary-color);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+}
+.impact-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.35;
+  margin-bottom: 0.35rem;
+}
+.impact-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+.tool-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+.tool-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+.tool-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+}
+.tool-icon {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+.tool-category {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+.tool-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.35rem;
+}
+.tool-role {
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.tool-card .tool-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin-bottom: 0;
+}
+.tool-card .tool-role {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.5;
+}
+.tool-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 14px;
+}
+.tool-meta-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+.tool-meta-label {
+  font-size: 11px;
+  color: var(--muted2);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tool-meta-value {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.45;
+}
+.tool-desc {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+.outcome-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+.outcome-icon svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+[data-theme="dark"] .overview-cards .feature-card:hover,
+[data-theme="dark"] .tool-card:hover,
+[data-theme="dark"] .market-card:hover,
+[data-theme="dark"] .capability-card:hover {
+  box-shadow: 0 12px 28px rgba(0,0,0,0.32);
+}
+[data-theme="dark"] .outcome-icon {
+  background: var(--primary-light);
+  color: var(--primary-color);
+}
+
+/* HERO LOGO */
+.hero-logo { height: 64px; width: auto; display: block; margin-bottom: 1.5rem; }
+
+/* FOOTER */
+footer {
+  background: var(--footer-bg);
+  color: #94a3b8;
+  padding: 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+footer .f-logo { font-size: 0.95rem; font-weight: 700; color: #fff; }
+footer p { font-size: 0.8rem; }
+footer a { color: var(--primary-color); text-decoration: none; }
+footer a:hover { color: #fff; }
+
+/* ANIMATIONS — section header fade */
+.fade-in { opacity:0; transform:translateY(16px); transition:opacity 0.55s ease, transform 0.55s ease; }
+.fade-in.visible { opacity:1; transform:translateY(0); }
+
+/* REVEAL CARD — individual staggered card animation */
+@keyframes cardReveal {
+  from { opacity:0; transform:translateY(32px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.reveal-card {
+  opacity: 0;
+  transform: translateY(32px);
+}
+.reveal-card.visible {
+  animation: cardReveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* THEME TOGGLE */
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border2); border-radius: 8px;
+  padding: 7px 14px; font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; white-space: nowrap;
+}
+.theme-toggle:hover { background: var(--bg3); }
+.theme-toggle svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+/* PROGRESS SECTION */
+.progress-header-center { text-align: center; }
+
+.progress-main-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.25rem 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.progress-main-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+
+.progress-card-label {
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--primary-color); margin-bottom: 0.6rem;
+}
+.progress-card-title {
+  font-size: 1.25rem; font-weight: 700; color: var(--text);
+  margin-bottom: 1.75rem; letter-spacing: -0.015em;
+}
+
+.progress-bar-wrap { position: relative; margin-bottom: 2.25rem; }
+.progress-bar-meta {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;
+}
+.progress-bar-meta-label { font-size: 0.8rem; color: var(--muted); }
+.progress-bar-pct { font-size: 0.8rem; font-weight: 700; color: var(--primary-color); }
+.progress-bar-track {
+  height: 10px; border-radius: 100px; background: var(--bg3); overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 100px; width: 0%;
+  background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-gradient) 100%);
+  transition: width 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative; overflow: hidden;
+}
+.progress-bar-fill::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+  animation: barSheen 2.5s ease-in-out infinite;
+}
+@keyframes barSheen {
+  0% { left: -60%; } 100% { left: 140%; }
+}
+
+.stage-labels { display: flex; align-items: flex-start; }
+.stage-item { display: flex; flex-direction: column; align-items: center; gap: 7px; flex-shrink: 0; }
+.stage-connector { flex: 1; height: 2px; background: var(--border2); margin-top: 7px; }
+.stage-connector-done { background: var(--primary-color); }
+.stage-connector-active { background: linear-gradient(90deg, var(--primary-color), var(--primary-gradient)); }
+
+.stage-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.stage-dot-done { background: var(--primary-color); }
+.stage-dot-done svg { width: 10px; height: 10px; }
+.stage-dot-current {
+  background: var(--primary-color);
+  animation: stagePulse 2s ease-in-out infinite;
+}
+@keyframes stagePulse {
+  0%, 100% { box-shadow: 0 0 0 3px var(--primary-ring); }
+  50%       { box-shadow: 0 0 0 7px var(--primary-ring-soft); }
+}
+.stage-dot-inactive { background: var(--border2); }
+
+.stage-name { font-size: 0.72rem; font-weight: 500; color: var(--muted2); text-align: center; white-space: nowrap; }
+.stage-done .stage-name    { color: var(--text2); font-weight: 600; }
+.stage-current .stage-name { color: var(--primary-color); font-weight: 700; }
+
+.status-cards-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+}
+.status-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-top: 3px solid transparent; border-radius: var(--radius);
+  padding: 1.5rem; transition: box-shadow 0.2s, transform 0.2s;
+}
+.status-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.status-completed  { border-top-color: var(--primary-color); }
+.status-inprogress { border-top-color: var(--primary-color); }
+.status-nextsteps  { border-top-color: var(--primary-color); }
+[data-theme="dark"] .status-completed,
+[data-theme="dark"] .status-nextsteps { border-top-color: var(--primary-color); }
+
+.status-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 1.1rem; }
+.status-icon-wrap {
+  width: 32px; height: 32px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.95rem; font-weight: 700; flex-shrink: 0;
+}
+.status-icon-accent { background: var(--primary-light); color: var(--primary-color); }
+[data-theme="dark"] .status-icon-accent { background: var(--primary-light); color: var(--primary-color); }
+
+.status-label { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+.status-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 9px; }
+.status-list li {
+  font-size: 0.85rem; color: var(--muted); line-height: 1.55;
+  padding-left: 18px; position: relative;
+}
+.status-list li::before { content: '–'; position: absolute; left: 0; color: var(--muted2); }
+
+/* ─── AERIS ENGINE SECTION ──────────────────────────── */
+
+/* Light-mode defaults — scoped to the section so nothing leaks */
+.aeris-engine-section {
+  /* Accent follows the active theme's primary color */
+  --eng-accent:             var(--primary-color);
+  --eng-accent-bg:          var(--primary-light);
+  --eng-accent-border:      var(--primary-border);
+  --eng-accent-border-hover:var(--primary-hover);
+  --eng-accent-bg-hover:    var(--primary-light);
+  --eng-accent-dim:         var(--primary-border);
+  --eng-accent-num:         color-mix(in srgb, var(--primary-color) 55%, transparent);
+
+  /* Chrome */
+  --eng-bg:          var(--bg2);
+  --eng-grid:        color-mix(in srgb, var(--primary-color) 4%, transparent);
+  --eng-track:       var(--border);
+  --eng-divider:     var(--border);
+
+  /* Sidebar text */
+  --eng-num:         var(--muted2);
+  --eng-label:       var(--muted);
+  --eng-hover-num:   var(--text2);
+  --eng-hover-label: var(--text2);
+  --eng-active-label:var(--text);
+  --eng-item-active-bg: transparent;
+
+  /* Content text */
+  --eng-headline:    var(--text);
+  --eng-para:        var(--muted);
+
+  /* Pipeline */
+  --eng-pipe-border: var(--border);
+  --eng-pipe-bg:     var(--surface);
+  --eng-pipe-label:  var(--muted2);
+  --eng-step-label:  var(--text2);
+  --eng-step-desc:   var(--muted);
+
+  background: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dark-mode overrides */
+[data-theme="dark"] .aeris-engine-section {
+  --eng-accent:             var(--primary-color);
+  --eng-accent-bg:          color-mix(in srgb, var(--primary-color) 4%, transparent);
+  --eng-accent-border:      color-mix(in srgb, var(--primary-color) 22%, transparent);
+  --eng-accent-border-hover:color-mix(in srgb, var(--primary-color) 55%, transparent);
+  --eng-accent-bg-hover:    color-mix(in srgb, var(--primary-color) 9%, transparent);
+  --eng-accent-dim:         color-mix(in srgb, var(--primary-color) 35%, transparent);
+  --eng-accent-num:         color-mix(in srgb, var(--primary-color) 40%, transparent);
+
+  --eng-bg:          #06091a;
+  --eng-grid:        color-mix(in srgb, var(--primary-color) 4%, transparent);
+  --eng-track:       rgba(255,255,255,0.08);
+  --eng-divider:     rgba(255,255,255,0.04);
+
+  --eng-num:         rgba(255,255,255,0.2);
+  --eng-label:       rgba(255,255,255,0.28);
+  --eng-hover-num:   rgba(255,255,255,0.35);
+  --eng-hover-label: rgba(255,255,255,0.55);
+  --eng-active-label:#fff;
+  --eng-item-active-bg: transparent;
+
+  --eng-headline:    #fff;
+  --eng-para:        rgba(255,255,255,0.45);
+
+  --eng-pipe-border: rgba(255,255,255,0.07);
+  --eng-pipe-bg:     rgba(255,255,255,0.015);
+  --eng-pipe-label:  rgba(255,255,255,0.15);
+  --eng-step-label:  rgba(255,255,255,0.65);
+  --eng-step-desc:   rgba(255,255,255,0.28);
+}
+
+.aeris-engine-section::before {
+  display: none;
+}
+.aeris-engine-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.aeris-engine-top {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 4.5rem;
+  margin-bottom: 3rem;
+  align-items: start;
+}
+
+/* Side nav */
+.aeris-sidenav {
+  position: static;
+  z-index: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0;
+  height: auto;
+  padding: 0;
+  background: transparent;
+  border-bottom: none;
+  backdrop-filter: none;
+}
+.aeris-sidenav::before {
+  display: none;
+}
+.aeris-sidenav-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 16px;
+  width: 100%;
+  padding: 14px 12px 14px 0;
+  cursor: pointer;
+  position: relative;
+  border-left: 2px solid transparent;
+  border-bottom: 1px solid var(--eng-divider);
+  transition: border-color 0.2s ease;
+}
+.aeris-sidenav-item:first-child {
+  border-top: 1px solid var(--eng-divider);
+}
+.aeris-sidenav-item.active {
+  background: transparent;
+  border-left-color: var(--eng-accent);
+}
+.aeris-sidenav-num {
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--eng-num);
+  text-align: right;
+  transition: color 0.2s ease;
+}
+.aeris-sidenav-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--eng-label);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.aeris-sidenav-item.active .aeris-sidenav-num  { color: var(--eng-accent); }
+.aeris-sidenav-item.active .aeris-sidenav-label { color: var(--eng-active-label); font-weight: 600; }
+
+/* Content area — overridden below by the panel stacking rules */
+.aeris-content-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--eng-accent);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.aeris-content-tag::before {
+  content: '';
+  width: 22px; height: 1px;
+  background: var(--eng-accent);
+  flex-shrink: 0;
+}
+.aeris-content-headline {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--eng-headline);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin-bottom: 1.25rem;
+}
+.aeris-content-headline em {
+  font-style: normal;
+  color: var(--eng-accent);
+}
+.aeris-content-para {
+  font-size: 0.97rem;
+  color: var(--eng-para);
+  line-height: 1.75;
+  max-width: 540px;
+  margin-bottom: 2rem;
+}
+.aeris-learn-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--eng-accent);
+  border: 1px solid var(--eng-accent-border);
+  border-radius: 8px;
+  padding: 10px 22px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: background 0.15s, border-color 0.15s, color 0.22s ease;
+  align-self: flex-start;
+  font-family: 'Inter', sans-serif;
+}
+.aeris-learn-btn:hover {
+  background: var(--eng-accent-bg-hover);
+  border-color: var(--eng-accent-border-hover);
+}
+.aeris-learn-btn svg { width: 12px; height: 12px; }
+.aeris-section-cta {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+/* Pipeline diagram */
+.aeris-pipeline {
+  border: 1px solid var(--eng-pipe-border);
+  border-radius: 14px;
+  background: var(--eng-pipe-bg);
+  padding: 1.75rem 2rem;
+}
+.aeris-pipeline-label {
+  font-size: 0.63rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--eng-pipe-label);
+  margin-bottom: 1.75rem;
+}
+.aeris-pipeline-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+}
+.aeris-pipeline-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px;
+  transition: all 0.2s ease;
+}
+.aeris-pipeline-node:hover {
+  transform: translateY(-4px);
+}
+.aeris-pipeline-step {
+  width: 58px; height: 58px;
+  border: 1px solid var(--eng-accent-border);
+  border-radius: 10px;
+  background: var(--eng-accent-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.aeris-pipeline-node:hover .aeris-pipeline-step {
+  border-color: var(--eng-accent-border-hover);
+  background: var(--eng-accent-bg-hover);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+}
+.aeris-pipeline-step-num {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--eng-accent-num);
+  text-align: center;
+}
+.aeris-pipeline-step-label {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: var(--eng-step-label);
+  text-align: center;
+  line-height: 1.35;
+}
+.aeris-pipeline-step-desc {
+  font-size: 0.66rem;
+  color: var(--eng-step-desc);
+  text-align: center;
+  line-height: 1.4;
+}
+.aeris-pipe-connector {
+  flex: 0 0 36px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 16px;
+  color: var(--eng-accent);
+  font-size: 24px;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+/* ─── SIDEBAR CONTENT PANELS ─────────────────────────────── */
+.aeris-content-area {
+  display: grid;
+  /* Single explicit cell — all panels placed here overlap cleanly */
+  grid-template-rows: auto;
+  grid-template-columns: 100%;
+}
+.aeris-content-panel {
+  /* Explicit placement in cell 1,1 so every panel stacks in the same slot */
+  grid-row: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.38s ease, transform 0.38s ease;
+  pointer-events: none;
+  /* Prevent invisible panels from contributing to row height */
+  visibility: hidden;
+}
+.aeris-content-panel.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+/* Sidebar hover state */
+.aeris-sidenav-item:not(.active):hover .aeris-sidenav-label {
+  color: var(--eng-hover-label);
+}
+.aeris-sidenav-item:not(.active):hover .aeris-sidenav-num {
+  color: var(--eng-hover-num);
+}
+
+@media(max-width:1024px){
+  .capability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media(max-width:768px){
+  .hero { grid-template-columns:1fr; padding:3rem 1.5rem 2rem; gap:2.5rem; }
+  .hero-card { display:none; }
+  nav { padding:0 1.25rem; }
+  .nav-links { display:none; }
+  .section-wrap { padding:3.5rem 1.5rem; }
+  .hero-stats { gap:1.25rem; }
+  footer { padding:1.75rem; flex-direction:column; }
+  .status-cards-grid { grid-template-columns: 1fr; }
+  .market-grid,
+  .capability-grid { grid-template-columns: 1fr; }
+  .usecase-layout,
+  .tools-grid { grid-template-columns: 1fr; }
+  .progress-main-card { padding: 1.5rem; }
+  .stage-name { font-size: 0.62rem; }
+  .aeris-engine-inner { padding: 3.5rem 1.5rem; }
+  .aeris-engine-top { grid-template-columns: 1fr; gap: 2rem; }
+  .aeris-sidenav {
+    flex-direction: column;
+    border-bottom: none;
+    padding-bottom: 0;
+    gap: 0;
+  }
+  .aeris-sidenav-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+    padding: 12px 12px 12px 0;
+    border-left: 2px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid var(--eng-divider);
+  }
+  .aeris-sidenav-item:first-child { border-top: none; }
+  .aeris-sidenav-item.active {
+    border-left-color: var(--eng-accent);
+  }
+  .aeris-pipeline { padding: 1.25rem; }
+  .aeris-pipeline-flow { flex-direction: column; gap: 0.75rem; }
+  .aeris-pipeline-node {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--eng-divider);
+  }
+  .aeris-pipeline-node:last-child { border-bottom: none; }
+  .aeris-pipeline-step { flex-shrink: 0; }
+  .aeris-pipeline-step-label,
+  .aeris-pipeline-step-desc,
+  .aeris-pipeline-step-num { text-align: left; }
+  .aeris-pipe-connector { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+  CSIT321 Final Year Project &nbsp;·&nbsp; <span>FYP-26-S2-12</span> &nbsp;·&nbsp; SIM University of Wollongong
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html"><img src="logo.png" alt="Aeris" class="nav-logo-img"/>Aeris</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Project Summary</a></li>
+    <li><a href="team.html">About Our Team</a></li>
+    <li><a href="documents.html">Documentation</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <span id="themeLabel">Dark</span>
+    </button>
+    <a class="nav-cta" href="documents.html">
+      View Documents
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="bg-light" aria-hidden="true"></div>
+  <div class="hero-left">
+    <h1>Chatbot for<br/><em>Customer Support</em></h1>
+    <p class="hero-sub">A generic, knowledge-based customer support chatbot platform that lets businesses upload their own data and deliver context-aware, intelligent responses — no retraining required.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#overview">Explore Project</a>
+      <a class="btn-secondary" href="documents.html">View Documentation</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">AI</div><div class="label">Grounded Support Answers</div></div>
+      <div class="stat"><div class="num">5</div><div class="label">Team Members</div></div>
+      <div class="stat"><div class="num">CSIT321</div><div class="label">Final Year Project</div></div>
+    </div>
+  </div>
+
+  <!-- MINI CHAT CARD -->
+  <div class="hero-card">
+    <div class="card-topbar">
+      <div class="card-bot-icon">🤖</div>
+      <div>
+        <div class="card-bot-name">Support Assistant</div>
+        <div class="card-bot-status">Online · RAG-powered</div>
+      </div>
+    </div>
+    <div class="card-messages" id="chatMessages"></div>
+    <div class="card-input-row">
+      <input class="card-input" placeholder="Ask a question..." readonly/>
+      <button class="card-send-btn">↑</button>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- INTRODUCTION / PROBLEM -->
+<div class="overview-bg">
+  <div class="section-wrap" id="overview">
+    <div class="section-header fade-in">
+      <div class="section-tag">INTRODUCTION</div>
+      <h2 class="section-title">What is Aeris?</h2>
+    </div>
+
+    <div class="features-grid overview-cards" data-reveal-group>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">💬</div>
+        <h3 class="feat-title">AI Customer Support Chatbot</h3>
+        <p class="feat-desc">Aeris helps businesses answer customer questions instantly by connecting a chatbot to company documents, FAQs, policies, and website content.</p>
+      </div>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">⚠️</div>
+        <h3 class="feat-title">Problem We Solve</h3>
+        <p class="feat-desc">Many businesses still depend on manual support for repeated questions, causing slow response times, inconsistent answers, and higher support workload.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- MOTIVATION -->
+<div class="features-bg">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-tag">MOTIVATION</div>
+      <h2 class="section-title">Why Aeris Matters</h2>
+    </div>
+
+    <div class="features-grid" data-reveal-group>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">🤖</div>
+        <h3 class="feat-title">Reduce Repetitive Work</h3>
+        <p class="feat-desc">Automates common questions so support teams can focus on complex cases.</p>
+      </div>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">✅</div>
+        <h3 class="feat-title">Consistent Answers</h3>
+        <p class="feat-desc">Uses approved company knowledge to keep responses reliable and aligned.</p>
+      </div>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">🕒</div>
+        <h3 class="feat-title">24/7 Availability</h3>
+        <p class="feat-desc">Provides support outside working hours without needing extra staff.</p>
+      </div>
+      <div class="feature-card reveal-card">
+        <div class="feat-icon-wrap">🔍</div>
+        <h3 class="feat-title">Knowledge Gap Detection</h3>
+        <p class="feat-desc">Helps identify missing information when the chatbot cannot answer confidently.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- TARGET MARKETS -->
+<div class="section-wrap">
+  <div class="section-header fade-in">
+    <div class="section-tag">TARGET MARKETS</div>
+    <h2 class="section-title">Built for Any Industry</h2>
+    <p class="section-sub">One platform, different knowledge bases. Aeris can support multiple industries by adapting to each company's own data.</p>
+  </div>
+
+  <div class="market-grid" data-reveal-group>
+    <div class="market-card reveal-card">
+      <div class="market-icon">🏥</div>
+      <h3 class="market-title">Healthcare &amp; Pharmacy</h3>
+      <p class="market-desc">Patients and caregivers can get instant answers about appointments, medication guidance, clinic policies, and general support FAQs.</p>
+    </div>
+    <div class="market-card reveal-card">
+      <div class="market-icon">🎓</div>
+      <h3 class="market-title">Education</h3>
+      <p class="market-desc">Students and staff can get help with LMS navigation, course information, school services, and IT support questions.</p>
+    </div>
+    <div class="market-card reveal-card">
+      <div class="market-icon">🛒</div>
+      <h3 class="market-title">E-Commerce</h3>
+      <p class="market-desc">Customers can receive real-time help with product information, order status, returns, refunds, and post-purchase support.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- FEATURES / ABOUT — Aeris Engine Section -->
+<div class="aeris-engine-section">
+  <div class="aeris-engine-inner">
+
+    <div class="section-header fade-in">
+      <div class="section-tag">CORE FEATURES</div>
+      <h2 class="section-title">A Product-Focused AI Support Experience</h2>
+      <p class="section-sub">Key product capabilities for grounded AI customer support.</p>
+    </div>
+
+    <div class="aeris-engine-top fade-in">
+      <!-- Left vertical side navigation -->
+      <nav class="aeris-sidenav" aria-label="Product overview navigation">
+        <div class="aeris-sidenav-item active">
+          <span class="aeris-sidenav-num">01</span>
+          <span class="aeris-sidenav-label">Overview</span>
+        </div>
+        <div class="aeris-sidenav-item">
+          <span class="aeris-sidenav-num">02</span>
+          <span class="aeris-sidenav-label">Knowledge Base</span>
+        </div>
+        <div class="aeris-sidenav-item">
+          <span class="aeris-sidenav-num">03</span>
+          <span class="aeris-sidenav-label">How It Works</span>
+        </div>
+        <div class="aeris-sidenav-item">
+          <span class="aeris-sidenav-num">04</span>
+          <span class="aeris-sidenav-label">AI Responses</span>
+        </div>
+        <div class="aeris-sidenav-item">
+          <span class="aeris-sidenav-num">05</span>
+          <span class="aeris-sidenav-label">Adaptability</span>
+        </div>
+      </nav>
+
+      <!-- Right content area — panels switch via JS -->
+      <div class="aeris-content-area">
+
+        <!-- Panel 01: Overview -->
+        <div class="aeris-content-panel active">
+          <div class="aeris-content-tag">AI Customer Support</div>
+          <h2 class="aeris-content-headline">Support Customers Instantly<br/><em>With Aeris</em></h2>
+          <p class="aeris-content-para">Aeris answers customer questions in real time using approved company knowledge, helping reduce repetitive support work and improve consistency.</p>
+        </div>
+
+        <!-- Panel 02: Knowledge Base -->
+        <div class="aeris-content-panel">
+          <div class="aeris-content-tag">Custom Knowledge</div>
+          <h2 class="aeris-content-headline">Turn Company Data<br/><em>Into Answers</em></h2>
+          <p class="aeris-content-para">Upload documents, FAQs, policies, and website content to create a custom knowledge base. Aeris uses these sources to keep answers accurate and traceable.</p>
+        </div>
+
+        <!-- Panel 03: How It Works -->
+        <div class="aeris-content-panel">
+          <div class="aeris-content-tag">RAG Workflow</div>
+          <h2 class="aeris-content-headline">Retrieve, Understand,<br/><em>Respond</em></h2>
+          <p class="aeris-content-para">Aeris uses Retrieval-Augmented Generation to match user questions with relevant company content before producing a grounded answer.</p>
+        </div>
+
+        <!-- Panel 04: AI Responses -->
+        <div class="aeris-content-panel">
+          <div class="aeris-content-tag">Intelligent Support</div>
+          <h2 class="aeris-content-headline">Context-Aware Answers<br/><em>Every Time</em></h2>
+          <p class="aeris-content-para">Aeris provides natural answers, remembers conversation context, supports chat history, and avoids unsupported replies when information is missing.</p>
+        </div>
+
+        <!-- Panel 05: Adaptability -->
+        <div class="aeris-content-panel">
+          <div class="aeris-content-tag">Flexibility</div>
+          <h2 class="aeris-content-headline">Adaptive to<br/><em>Any Domain</em></h2>
+          <p class="aeris-content-para">Aeris adapts across industries by changing the knowledge base, making it suitable for healthcare, education, e-commerce, finance, and more.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- System architecture -->
+    <div class="aeris-pipeline fade-in">
+      <div class="aeris-pipeline-label">System Architecture: RAG-Focused Support Flow</div>
+      <div class="aeris-pipeline-flow">
+
+        <div class="aeris-pipeline-node">
+          <div class="aeris-pipeline-step">
+            <span aria-hidden="true">📂</span>
+          </div>
+          <span class="aeris-pipeline-step-num">STEP 01</span>
+          <span class="aeris-pipeline-step-label">Upload Knowledge</span>
+          <span class="aeris-pipeline-step-desc">Upload business documents and FAQs.</span>
+        </div>
+
+        <div class="aeris-pipe-connector">→</div>
+
+        <div class="aeris-pipeline-node">
+          <div class="aeris-pipeline-step">
+            <span aria-hidden="true">🧠</span>
+          </div>
+          <span class="aeris-pipeline-step-num">STEP 02</span>
+          <span class="aeris-pipeline-step-label">Organize Data</span>
+          <span class="aeris-pipeline-step-desc">Prepare data for fast search.</span>
+        </div>
+
+        <div class="aeris-pipe-connector">→</div>
+
+        <div class="aeris-pipeline-node">
+          <div class="aeris-pipeline-step">
+            <span aria-hidden="true">🔎</span>
+          </div>
+          <span class="aeris-pipeline-step-num">STEP 03</span>
+          <span class="aeris-pipeline-step-label">Understand Queries</span>
+          <span class="aeris-pipeline-step-desc">Match user questions to relevant content.</span>
+        </div>
+
+        <div class="aeris-pipe-connector">→</div>
+
+        <div class="aeris-pipeline-node">
+          <div class="aeris-pipeline-step">
+            <span aria-hidden="true">💡</span>
+          </div>
+          <span class="aeris-pipeline-step-num">STEP 04</span>
+          <span class="aeris-pipeline-step-label">Generate Answers</span>
+          <span class="aeris-pipeline-step-desc">Provide clear and grounded answers.</span>
+        </div>
+
+        <div class="aeris-pipe-connector">→</div>
+
+        <div class="aeris-pipeline-node">
+          <div class="aeris-pipeline-step">
+            <span aria-hidden="true">🌐</span>
+          </div>
+          <span class="aeris-pipeline-step-num">STEP 05</span>
+          <span class="aeris-pipeline-step-label">Scale Across Domains</span>
+          <span class="aeris-pipeline-step-desc">Adapt by updating the knowledge base.</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="aeris-section-cta fade-in">
+      <a href="documents.html" class="aeris-learn-btn">
+        View Documentation
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- SUPPORTED CAPABILITIES -->
+<div class="section-wrap">
+  <div class="section-header fade-in">
+    <div class="section-tag">SUPPORTED CAPABILITIES</div>
+    <h2 class="section-title">What Aeris Can Support</h2>
+    <p class="section-sub">Aeris combines knowledge ingestion, multilingual support, source transparency, and conversation tracking to create a complete customer support experience.</p>
+  </div>
+
+  <div class="capability-grid" data-reveal-group>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">🌐</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Web Crawling</h3>
+      <p class="capability-desc">Aeris can crawl company websites to help build a knowledge base from web-based content.</p>
+    </div>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">📄</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Document Upload</h3>
+      <p class="capability-desc">Companies can upload PDFs, manuals, FAQs, and policy documents for chatbot knowledge retrieval.</p>
+    </div>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">💬</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Q&amp;A Training</h3>
+      <p class="capability-desc">Administrators can define question-and-answer pairs to improve responses for common or sensitive queries.</p>
+    </div>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">🌍</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Multilingual Responses</h3>
+      <p class="capability-desc">Aeris can support users in different languages for broader customer accessibility.</p>
+    </div>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">🔗</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Source Links</h3>
+      <p class="capability-desc">Responses can include references back to source documents or pages for transparency.</p>
+    </div>
+    <div class="capability-card reveal-card">
+      <div class="capability-icon">🧾</div>
+      <span class="capability-badge">Supported</span>
+      <h3 class="capability-title">Chat History &amp; Tickets</h3>
+      <p class="capability-desc">Conversation history can be reviewed, and unresolved issues can be prepared for support follow-up.</p>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- USE CASE / IMPACT -->
+<div class="section-wrap">
+  <div class="usecase-layout" data-reveal-group>
+    <section class="usecase-panel reveal-card">
+      <div class="usecase-panel-header">
+        <div class="section-tag">USE CASE</div>
+        <h2 class="section-title">How Users Interact With Aeris</h2>
+      </div>
+
+      <ul class="usecase-timeline" aria-label="How users interact with Aeris">
+        <li>
+          <h3 class="timeline-title">System Admin</h3>
+          <p class="timeline-desc">System Admin manages access and backend settings.</p>
+        </li>
+        <li>
+          <h3 class="timeline-title">User Admin</h3>
+          <p class="timeline-desc">User Admin uploads and manages company knowledge sources.</p>
+        </li>
+        <li>
+          <h3 class="timeline-title">User</h3>
+          <p class="timeline-desc">User submits support questions through the chat interface.</p>
+        </li>
+        <li>
+          <h3 class="timeline-title">Admin Review</h3>
+          <p class="timeline-desc">Admin reviews unanswered questions and improves the knowledge base.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="usecase-panel reveal-card">
+      <div class="usecase-panel-header">
+        <div class="section-tag">IMPACT</div>
+        <h2 class="section-title">Expected Outcomes</h2>
+      </div>
+
+      <div class="impact-stack" aria-label="Expected outcomes">
+        <article class="impact-card">
+          <div class="impact-num">01</div>
+          <div>
+            <h3 class="impact-title">Instant Response</h3>
+            <p class="impact-desc">Users receive immediate answers without waiting for human support.</p>
+          </div>
+        </article>
+        <article class="impact-card">
+          <div class="impact-num">02</div>
+          <div>
+            <h3 class="impact-title">Reduced Support Workload</h3>
+            <p class="impact-desc">Repetitive customer queries are handled automatically by Aeris.</p>
+          </div>
+        </article>
+        <article class="impact-card">
+          <div class="impact-num">03</div>
+          <div>
+            <h3 class="impact-title">Company-Specific Answers</h3>
+            <p class="impact-desc">Responses are generated based on uploaded company knowledge.</p>
+          </div>
+        </article>
+        <article class="impact-card">
+          <div class="impact-num">04</div>
+          <div>
+            <h3 class="impact-title">Continuous Improvement</h3>
+            <p class="impact-desc">Unanswered questions are identified as knowledge gaps and used to improve the system.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- IMPLEMENTATION / TOOLS -->
+<div class="features-bg">
+  <div class="section-wrap">
+    <div class="section-header fade-in">
+      <div class="section-tag">IMPLEMENTATION / TOOLS</div>
+      <h2 class="section-title">Project Tools &amp; Technologies</h2>
+      <p class="section-sub">Planned tools from the PRD.</p>
+    </div>
+
+    <div class="tools-grid" data-reveal-group>
+      <div class="tool-card reveal-card">
+        <div class="tool-icon">🖥️</div>
+        <div class="tool-category">Front-end</div>
+        <h3 class="tool-name">Streamlit / React</h3>
+        <div class="tool-meta">
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Development Tools</span>
+            <span class="tool-meta-value">Visual Studio Code</span>
+          </div>
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Language</span>
+            <span class="tool-meta-value">Python / JavaScript / TypeScript</span>
+          </div>
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Framework</span>
+            <span class="tool-meta-value">Streamlit / React</span>
+          </div>
+        </div>
+        <p class="tool-desc">Streamlit is used to build interactive web apps with Python. React supports reusable JavaScript components for building user interfaces efficiently.</p>
+      </div>
+      <div class="tool-card reveal-card">
+        <div class="tool-icon">☁️</div>
+        <div class="tool-category">Back-end</div>
+        <h3 class="tool-name">LangChain / LangGraph</h3>
+        <div class="tool-meta">
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Development Tools</span>
+            <span class="tool-meta-value">Visual Studio Code</span>
+          </div>
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Language</span>
+            <span class="tool-meta-value">Python</span>
+          </div>
+        </div>
+        <p class="tool-desc">The chatbot backend will use LangChain and LangGraph to build and manage agents, decide which tools to use, stream responses, and integrate chat models and embedding models for LLM workflows.</p>
+      </div>
+      <div class="tool-card reveal-card">
+        <div class="tool-icon">🗄️</div>
+        <div class="tool-category">Database</div>
+        <h3 class="tool-name">MySQL / ChromaDB</h3>
+        <div class="tool-meta">
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Development Tools</span>
+            <span class="tool-meta-value">MySQL Workbench / ChromaDB</span>
+          </div>
+          <div class="tool-meta-row">
+            <span class="tool-meta-label">Language</span>
+            <span class="tool-meta-value">MySQL / Python</span>
+          </div>
+        </div>
+        <p class="tool-desc">MySQL stores user admin, platform management, and uploaded document records. ChromaDB stores embeddings with metadata and enables vector search to retrieve relevant knowledge-base chunks.</p>
+      </div>
+      <div class="tool-card reveal-card">
+        <div class="tool-icon">🛠️</div>
+        <div class="tool-category">Development Tools</div>
+        <h3 class="tool-name">VS Code / Android Studio / Notepad++ / MySQL Workbench</h3>
+        <p class="tool-desc">These tools support coding, editing, debugging, and database management throughout the project development process.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider"/>
+
+<!-- WHERE WE ARE NOW -->
+<div class="section-wrap">
+  <div class="section-header fade-in progress-header-center">
+    <div class="section-tag">PROGRESS</div>
+    <h2 class="section-title">Where We Are Now</h2>
+  </div>
+
+  <div data-reveal-group>
+    <div class="progress-main-card reveal-card">
+      <div class="progress-card-label">CURRENT STAGE</div>
+      <h3 class="progress-card-title">Architecture and Planning Stage</h3>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-meta">
+          <span class="progress-bar-meta-label">Overall Progress</span>
+          <span class="progress-bar-pct">35%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressFill"></div>
+        </div>
+      </div>
+      <div class="stage-labels">
+        <div class="stage-item stage-done">
+          <div class="stage-dot stage-dot-done">
+            <svg viewBox="0 0 10 10" fill="none"><path d="M2 5l2.5 2.5L8 3" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <span class="stage-name">Research</span>
+        </div>
+        <div class="stage-connector stage-connector-done"></div>
+        <div class="stage-item stage-current">
+          <div class="stage-dot stage-dot-current"></div>
+          <span class="stage-name">Architecture</span>
+        </div>
+        <div class="stage-connector stage-connector-active"></div>
+        <div class="stage-item stage-inactive">
+          <div class="stage-dot stage-dot-inactive"></div>
+          <span class="stage-name">Prototype</span>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage-item stage-inactive">
+          <div class="stage-dot stage-dot-inactive"></div>
+          <span class="stage-name">Core Dev</span>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage-item stage-inactive">
+          <div class="stage-dot stage-dot-inactive"></div>
+          <span class="stage-name">Testing</span>
+        </div>
+        <div class="stage-connector"></div>
+        <div class="stage-item stage-inactive">
+          <div class="stage-dot stage-dot-inactive"></div>
+          <span class="stage-name">Final</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="status-cards-grid" data-reveal-group>
+    <div class="status-card status-completed reveal-card">
+      <div class="status-card-header">
+        <div class="status-icon-wrap status-icon-accent">✓</div>
+        <span class="status-label">Completed</span>
+      </div>
+      <ul class="status-list">
+        <li>Project topic confirmed</li>
+        <li>Chatbot features researched</li>
+        <li>Competitors reviewed</li>
+        <li>Project direction defined</li>
+      </ul>
+    </div>
+    <div class="status-card status-inprogress reveal-card">
+      <div class="status-card-header">
+        <div class="status-icon-wrap status-icon-accent">↻</div>
+        <span class="status-label">In Progress</span>
+      </div>
+      <ul class="status-list">
+        <li>Finalising architecture</li>
+        <li>Refining use cases</li>
+        <li>Designing chatbot UI</li>
+        <li>Preparing documentation</li>
+      </ul>
+    </div>
+    <div class="status-card status-nextsteps reveal-card">
+      <div class="status-card-header">
+        <div class="status-icon-wrap status-icon-accent">→</div>
+        <span class="status-label">Next Steps</span>
+      </div>
+      <ul class="status-list">
+        <li>Complete planning</li>
+        <li>Build first prototype</li>
+        <li>Test conversation flow</li>
+        <li>Improve from feedback</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-logo">Aeris · FYP-26-S2-12</div>
+  <p>© 2026 Bachelor of Computer Science · SIM–UOW · Supervisor: Dr Poh Kok Loo</p>
+</footer>
+
+<script>
+// ── Theme toggle ─────────────────────────────────────────────────────────────
+(function () {
+  var html  = document.documentElement;
+  var btn   = document.getElementById('themeToggle');
+  var icon  = document.getElementById('themeIcon');
+  var label = document.getElementById('themeLabel');
+
+  var MOON = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  var SUN  = '<circle cx="12" cy="12" r="5"/>'
+           + '<line x1="12" y1="1" x2="12" y2="3"/>'
+           + '<line x1="12" y1="21" x2="12" y2="23"/>'
+           + '<line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>'
+           + '<line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>'
+           + '<line x1="1" y1="12" x2="3" y2="12"/>'
+           + '<line x1="21" y1="12" x2="23" y2="12"/>'
+           + '<line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>'
+           + '<line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+
+  function updateUI(isDark) {
+    icon.innerHTML  = isDark ? SUN : MOON;
+    label.textContent = isDark ? 'Light' : 'Dark';
+  }
+
+  updateUI(html.getAttribute('data-theme') === 'dark');
+
+  btn.addEventListener('click', function () {
+    var isDark = html.getAttribute('data-theme') === 'dark';
+    if (isDark) {
+      html.removeAttribute('data-theme');
+      localStorage.setItem('aeris-theme', 'light');
+    } else {
+      html.setAttribute('data-theme', 'dark');
+      localStorage.setItem('aeris-theme', 'dark');
+    }
+    updateUI(!isDark);
+  });
+})();
+// ─────────────────────────────────────────────────────────────────────────────
+
+// ── Chat demo animation ──────────────────────────────────────────────────────
+(function () {
+  const box = document.getElementById('chatMessages');
+
+  const STEPS = [
+    { role: 'bot',  text: 'Hi! I can answer questions based on your uploaded business documents. How can I help?' },
+    { role: 'user', text: "What's your return policy?" },
+    { role: 'bot',  text: 'Based on your uploaded policy document, returns are accepted within 30 days with a valid receipt.' },
+    { role: 'user', text: 'Can you check my order status?' },
+    { role: 'bot',  text: 'Sure. Please provide your order number so I can check the latest status for you.' },
+  ];
+
+  // Delays: pause before showing each step (ms)
+  const DELAYS = [600, 1400, 0, 1400, 0];
+  // Extra "typing" delay before bot messages (ms)
+  const TYPING_DURATION = 1700;
+  // Pause at end before restarting (ms)
+  const RESTART_PAUSE = 3200;
+
+  function scrollBottom() {
+    box.scrollTop = box.scrollHeight;
+  }
+
+  function addMessage(role, text) {
+    const wrap = document.createElement('div');
+    wrap.className = 'chat-entry';
+    const label = document.createElement('div');
+    label.className = 'chat-label' + (role === 'user' ? ' right' : '');
+    label.textContent = role === 'bot' ? 'AI Agent' : 'Customer';
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble ' + (role === 'bot' ? 'bot' : 'user');
+    bubble.textContent = text;
+    wrap.appendChild(label);
+    wrap.appendChild(bubble);
+    box.appendChild(wrap);
+    scrollBottom();
+  }
+
+  function showTyping() {
+    const wrap = document.createElement('div');
+    wrap.className = 'typing-wrap';
+    wrap.id = 'typingIndicator';
+    const label = document.createElement('div');
+    label.className = 'chat-label';
+    label.textContent = 'AI Agent';
+    const ind = document.createElement('div');
+    ind.className = 'typing-indicator';
+    ind.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+    wrap.appendChild(label);
+    wrap.appendChild(ind);
+    box.appendChild(wrap);
+    scrollBottom();
+  }
+
+  function removeTyping() {
+    const el = document.getElementById('typingIndicator');
+    if (el) el.remove();
+  }
+
+  function clearChat() {
+    box.innerHTML = '';
+  }
+
+  function runSequence(steps, index) {
+    if (index >= steps.length) {
+      setTimeout(() => {
+        clearChat();
+        runSequence(steps, 0);
+      }, RESTART_PAUSE);
+      return;
+    }
+
+    const step = steps[index];
+    const delay = DELAYS[index] || 0;
+
+    if (step.role === 'bot') {
+      // Show typing indicator first, then the message
+      setTimeout(() => {
+        showTyping();
+        setTimeout(() => {
+          removeTyping();
+          addMessage('bot', step.text);
+          runSequence(steps, index + 1);
+        }, TYPING_DURATION);
+      }, delay);
+    } else {
+      setTimeout(() => {
+        addMessage('user', step.text);
+        runSequence(steps, index + 1);
+      }, delay);
+    }
+  }
+
+  // Kick off the demo
+  runSequence(STEPS, 0);
+})();
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Section header: fade in as one unit
+const headerObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      headerObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+document.querySelectorAll('.fade-in').forEach(el => headerObs.observe(el));
+
+// Progress bar: animate fill when scrolled into view
+(function () {
+  var fill = document.getElementById('progressFill');
+  if (!fill) return;
+  var card = fill.closest('.progress-main-card');
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        setTimeout(function () { fill.style.width = '35%'; }, 350);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  obs.observe(card);
+})();
+
+// Card groups: stagger each card as the grid enters view
+const cardObs = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const cards = entry.target.querySelectorAll('.reveal-card');
+    cards.forEach((card, i) => {
+      setTimeout(() => card.classList.add('visible'), i * 120);
+    });
+    cardObs.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('[data-reveal-group]').forEach(el => cardObs.observe(el));
+
+// ── Aeris sidenav interaction ─────────────────────────────────────────────────
+(function () {
+  var items  = Array.from(document.querySelectorAll('.aeris-sidenav-item'));
+  var panels = Array.from(document.querySelectorAll('.aeris-content-panel'));
+  if (!items.length || !panels.length) return;
+
+  var hoverTimer = null;
+  var isTouchDevice = false;
+
+  // Detect first touch so hover-mode is disabled on touch screens
+  document.addEventListener('touchstart', function () {
+    isTouchDevice = true;
+  }, { once: true, passive: true });
+
+  function activatePanel(index) {
+    items.forEach(function (item, i) {
+      item.classList.toggle('active', i === index);
+    });
+    panels.forEach(function (panel, i) {
+      panel.classList.toggle('active', i === index);
+    });
+  }
+
+  items.forEach(function (item, index) {
+    // Click: works on both desktop and mobile
+    item.addEventListener('click', function () {
+      activatePanel(index);
+    });
+
+    // Hover: desktop only, with a short debounce to avoid flickering on quick passes
+    item.addEventListener('mouseenter', function () {
+      if (isTouchDevice) return;
+      clearTimeout(hoverTimer);
+      hoverTimer = setTimeout(function () {
+        activatePanel(index);
+      }, 90);
+    });
+
+    item.addEventListener('mouseleave', function () {
+      clearTimeout(hoverTimer);
+    });
+  });
+})();
+// ─────────────────────────────────────────────────────────────────────────────
+</script>
+</body>
+</html>
